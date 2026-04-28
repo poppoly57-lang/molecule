@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,38 +9,61 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
+        html,
+        body {
+            overflow-x: hidden;
+        }
+
+        /* img,
+        video {
+            max-width: 100%;
+        } */
+
         html {
             scroll-behavior: smooth;
         }
 
-        *{
+        * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
 
-        #home{
+        .home {
             justify-content: space-between;
             display: flex;
             background-image: url(images/barner.png);
             height: 100px;
-            box-shadow: 8px 4px 8px 8px rgba(0,0,0,0.3);
+            box-shadow: 8px 4px 8px 8px rgba(0, 0, 0, 0.3);
+            background: transparent;
+            transition: all 0.3s ease;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            z-index: 1000;
         }
 
-        .log{
+        .home.scrolled {
+            backdrop-filter: blur(12px);
+        }
+
+        .log {
             width: 118px;
             height: 118px;
             border-radius: 100%;
         }
 
-        .nav-links{
+        .nav-links {
             display: flex;
             justify-content: space-between;
             list-style: none;
             margin-top: 40px;
         }
 
-        .links{
+        .links {
             text-decoration: none;
             color: white;
             padding-inline: 60px;
@@ -47,21 +71,21 @@
             transition: 1s;
         }
 
-        .links:hover{
+        .links:hover {
             color: #a0a0a0;
             text-decoration: underline;
         }
 
-        .barn{
+        .barn {
             width: 100%;
         }
 
-        .blog{
+        .blog {
             display: flex;
             justify-content: space-between;
         }
 
-        .blog img{
+        .blog img {
             width: 335px;
             height: 400px;
             border-radius: 5px;
@@ -126,23 +150,31 @@
             margin-top: 8px;
         }
 
-        @media (max-width: 768px){
-            .nav-links{
+        @media (max-width: 768px) {
+            .nav-links {
                 display: none;
                 flex-direction: column;
                 position: absolute;
                 top: 80px;
                 right: 0;
-                background: goldenrod;
+                background-image: url(images/barner.png);
                 width: 100%;
                 text-align: center;
+                color: #c5a059;
+                text-align: left;
+                line-height: 50px;
+                transition: 0.3s ease;
             }
 
-            .nav-links.active{
+            .nav-links a:hover {
+                text-decoration: underline dotted;
+            }
+
+            .nav-links.active {
                 display: flex;
             }
 
-            .hamburger{
+            .hamburger {
                 display: block;
                 position: absolute;
                 top: 15px;
@@ -150,7 +182,7 @@
                 cursor: pointer;
             }
 
-            .hamburger span{
+            .hamburger span {
                 display: block;
                 background-color: white;
                 height: 4px;
@@ -158,19 +190,21 @@
                 margin: 6px 0px;
             }
 
-            .blog{
+            .blog {
+                margin-top:10px;
                 display: grid;
                 grid-template-columns: 1fr;
-                gap: 10px;
+                gap: 5px;
+                
             }
 
-            .blog img{
+            /* .blog img {
                 width: 100%;
                 height: auto;
-            }
+            } */
         }
 
-        .hamburger{
+        .hamburger {
             display: block;
         }
     </style>
@@ -178,83 +212,89 @@
 
 <body>
 
-<header id="home">
-    <img src="images/logo.jpeg" class="log">
+    <header class="home">
+        <img src="images/logo.jpeg" class="log">
 
-    
-    <ul class="nav-links" id="navMenu">
-        <li><a href="#menu" class="links">Our Menu</a></li>
-        <li><a href="#about" class="links">About</a></li>
-        <li><a href="#contact" class="links">Contact Us</a></li>
-        <li><a href="#location" class="links">Hours & Location</a></li>
-        <li><a href="#order" class="links">Order Now</a></li>
-    </ul>
 
-    <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+        <ul class="nav-links" id="navMenu">
+            <li><a href="#menu" class="links">Our Menu</a></li>
+            <li><a href="#about" class="links">About</a></li>
+            <li><a href="#contact" class="links">Contact Us</a></li>
+            <li><a href="#location" class="links">Hours & Location</a></li>
+            <li><a href="#order" class="links">Order Now</a></li>
+        </ul>
+
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <img src="images/barner.png" class="barn">
+
+    <div class="blog">
+        <img src="images/mole chicken.jpeg">
+        <img src="images/food.jpeg">
+        <img src="images/meat.jpeg">
+        <img src="images/wing.jpeg">
     </div>
-</header>
 
-<img src="images/barner.png" class="barn">
-
-<div class="blog">
-    <img src="images/mole chicken.jpeg">
-    <img src="images/food.jpeg">
-    <img src="images/meat.jpeg">
-    <img src="images/wing.jpeg">
-</div>
-
-<div class="blog">
-    <img src="images/chicken.jpeg">
-    <img src="images/plane meat.jpeg">
-    <img src="images/wing 2.jpeg">
-    <img src="images/pizza heart.jpeg">
-</div>
-
-
-<section id="menu" class="our-menu">
-  <h2 class="section-title">Signature Mains</h2>
-  
-  <div class="menu-item">
-    <div class="item-header">
-      <span class="item-name">Hearted Pizza</span>
-      <span class="spacer"></span>
-      <span class="price">UGX 100000</span>
+    <div class="blog">
+        <img src="images/chicken.jpeg">
+        <img src="images/plane meat.jpeg">
+        <img src="images/wing 2.jpeg">
+        <img src="images/pizza heart.jpeg">
     </div>
-    <p class="description">Heavenly made to suit your taste</p>
-  </div>
 
-  <div class="menu-item">
-    <div class="item-header">
-      <span class="item-name">Plain Beef</span>
-      <span class="spacer"></span>
-      <span class="price">UGX 80000</span>
-    </div>
-    <p class="description">Made with a luxurious golden look to please the guests.</p>
-  </div>
 
-  <div class="menu-item">
-    <div class="item-header">
-      <span class="item-name">Chicken</span>
-      <span class="spacer"></span>
-      <span class="price">UGX 90000</span>
-    </div>
-    <p class="description">A taste your tongue cannot forget.</p>
-  </div>
-</section>
+    <section id="menu" class="our-menu">
+        <h2 class="section-title">Signature Mains</h2>
 
-<script>
-const hamburger = document.getElementById('hamburger');
+        <div class="menu-item">
+            <div class="item-header">
+                <span class="item-name">Hearted Pizza</span>
+                <span class="spacer"></span>
+                <span class="price">UGX 100000</span>
+            </div>
+            <p class="description">Heavenly made to suit your taste</p>
+        </div>
 
-/*humbarger activator*/
-const menu = document.getElementById('navMenu');
+        <div class="menu-item">
+            <div class="item-header">
+                <span class="item-name">Plain Beef</span>
+                <span class="spacer"></span>
+                <span class="price">UGX 80000</span>
+            </div>
+            <p class="description">Made with a luxurious golden look to please the guests.</p>
+        </div>
 
-hamburger.addEventListener('click', ()=> {
-    menu.classList.toggle('active');
-});
-</script>
+        <div class="menu-item">
+            <div class="item-header">
+                <span class="item-name">Chicken</span>
+                <span class="spacer"></span>
+                <span class="price">UGX 90000</span>
+            </div>
+            <p class="description">A taste your tongue cannot forget.</p>
+        </div>
+    </section>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+
+        /*humbarger activator*/
+        const menu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        window.addEventListener("scroll", function () {
+            const home = document.querySelector(".home");
+            home.classList.toggle("scrolled", window.scrollY > 50);
+        });
+    </script>
 
 </body>
+
 </html>
