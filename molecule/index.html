@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOLECULE RESTAURANT</title>
+    <link rel="icon" type="image/png" href="images/favi.png">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--dark);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+}
+
+img { display: block; max-width: 100%; }
+
+a { color: inherit; }
+
+:focus-visible {
+    outline: 2px solid var(--gold-soft);
+    outline-offset: 3px;
+}
+
+.mol-icon { color: var(--gold); flex-shrink: 0; }
+
+/* ===== Header ===== */
+.home {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: clamp(16px, 4vw, 48px);
+    background: linear-gradient(to bottom, rgba(12,12,12,0.75), transparent);
+    z-index: 1000;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease, height 0.3s ease;
+}
+
+.home.scrolled {
+    background: rgba(12, 12, 12, 0.88);
+    backdrop-filter: blur(12px);
+    height: 66px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    z-index: 1001;
+}
+
+.log {
+    width: 46px;
+    height: 46px;
+    border-radius: 100%;
+    object-fit: cover;
+    border: 1px solid var(--line);
+}
+
+.log.small { width: 34px; height: 34px; }
+
+.brand-name {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--gold-soft);
+    letter-spacing: 0.02em;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 4px;
+}
+
+.links {
+    text-decoration: none;
+    color: var(--text);
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    transition: color 0.25s ease;
+    position: relative;
+}
+
+.links:hover,
+.links:focus-visible {
+    color: var(--gold-soft);
+}
+
+.links::after {
+    content: "";
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 4px;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+}
+
+.links:hover::after { transform: scaleX(1); }
+
+.links-cta {
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    color: var(--gold-soft);
+    margin-left: 8px;
+}
+
+.links-cta::after { display: none; }
+.links-cta:hover { background: var(--gold); color: var(--dark); }
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger span {
+    display: block;
+    background-color: var(--text);
+    height: 2px;
+    width: 26px;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* ===== Hero ===== */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 560px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.04);
+}
+
+.hero-veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(12,12,12,0.55) 0%, rgba(12,12,12,0.75) 55%, var(--dark) 100%);
+}
+
+.hero-nodes {
+    position: absolute;
+    inset: 0;
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.hero-nodes svg { width: 100%; height: 100%; }
+.hero-nodes line { stroke: var(--gold); stroke-width: 0.15; }
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding-inline: clamp(20px, 6vw, 60px);
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold-soft);
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
+    line-height: 1.08;
+    max-width: 16ch;
+}
+
+.hero h1 em {
+    font-style: italic;
+    color: var(--gold-soft);
+}
+
+.hero-sub {
+    color: var(--text-dim);
+    max-width: 46ch;
+    margin-top: 22px;
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 34px;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+}
+
+.btn-primary:hover { transform: translateY(-2px); background: var(--gold-soft); }
+
+.btn-ghost {
+    border: 1px solid var(--line);
+    color: var(--text);
+}
+
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold-soft); transform: translateY(-2px); }
+
+/* ===== Section basics ===== */
+section { padding: 90px clamp(20px, 6vw, 60px); max-width: var(--maxw); margin: 0 auto; }
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--gold);
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.section-title.left { text-align: left; }
+
+.section-sub {
+    text-align: center;
+    color: var(--text-dim);
+    margin-bottom: 50px;
+    font-size: 0.95rem;
+}
+
+/* ===== Gallery ===== */
+.blog {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.blog figure {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    aspect-ratio: 3 / 4;
+}
+
+.blog img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.blog figure:hover img { transform: scale(1.08); }
+
+.blog figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    color: var(--text);
+    background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+}
+
+/* ===== Menu ===== */
+.menu-group { margin-bottom: 44px; }
+
+.menu-cat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    color: var(--gold-soft);
+    font-size: 1.15rem;
+    margin-bottom: 22px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+}
+
+.menu-item { margin-bottom: 30px; }
+
+.item-header {
+    display: flex;
+    align-items: baseline;
+}
+
+.item-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+}
+
+.spacer {
+    flex: 1;
+    border-bottom: 1px dotted var(--line);
+    margin: 0 15px;
+    transform: translateY(-4px);
+}
+
+.price { color: var(--gold); white-space: nowrap; }
+
+.description {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-top: 8px;
+    max-width: 60ch;
+}
+
+/* ===== About ===== */
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-media img { border-radius: var(--radius); }
+
+.about-copy p {
+    color: var(--text-dim);
+    margin-top: 16px;
+    max-width: 55ch;
+}
+
+/* ===== Location ===== */
+.location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px;
+}
+
+.hours-card {
+    background: var(--dark-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 30px;
+}
+
+.hours-card h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-soft);
+    margin-bottom: 14px;
+}
+
+.hours-card h3:not(:first-child) { margin-top: 26px; }
+
+.hours-list { list-style: none; }
+
+.hours-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dotted var(--line);
+    color: var(--text-dim);
+    font-size: 0.92rem;
+}
+
+.address { color: var(--text-dim); font-size: 0.92rem; }
+
+.map-wrap {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    min-height: 280px;
+}
+
+.map-wrap iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 280px;
+    border: 0;
+    filter: grayscale(0.3) invert(0.92) contrast(0.9);
+}
+
+/* ===== Contact ===== */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 50px;
+}
+
+.contact-form { display: flex; flex-direction: column; gap: 6px; }
+
+.contact-form label {
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 14px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    background: var(--dark-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--gold);
+    outline: none;
+}
+
+.contact-form button { margin-top: 22px; align-self: flex-start; border: none; cursor: pointer; }
+
+.form-note { color: var(--gold-soft); font-size: 0.85rem; margin-top: 10px; min-height: 1.2em; }
+
+.contact-info p { margin-bottom: 24px; color: var(--text-dim); font-size: 0.95rem; }
+.contact-info a { text-decoration: none; color: var(--text); }
+.contact-info a:hover { color: var(--gold-soft); }
+
+/* ===== Order CTA ===== */
+.order-cta {
+    text-align: center;
+    background: var(--dark-2);
+    border-radius: var(--radius);
+    padding: 70px clamp(20px, 6vw, 60px);
+}
+
+.mol-icon.big { margin-bottom: 16px; }
+
+.order-cta h2 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    color: var(--gold);
+}
+
+.order-cta p {
+    color: var(--text-dim);
+    margin-top: 12px;
+}
+
+.order-cta .hero-actions { justify-content: center; }
+
+/* ===== Footer ===== */
+.site-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 40px 20px 60px;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--line);
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold-soft);
+    font-size: 1.1rem;
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 860px) {
+    .nav-links {
+        display: none;
+        position: fixed;
+        inset: 0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        background: rgba(10, 9, 7, 0.97);
+        backdrop-filter: blur(10px);
+    }
+
+    .nav-links.active { display: flex; }
+
+    .links { font-size: 1.2rem; padding: 14px 24px; }
+    .links-cta { margin-left: 0; margin-top: 10px; }
+
+    .hamburger { display: flex; }
+
+    .about {
+        grid-template-columns: 1fr;
+    }
+
+    .location-grid,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .map-wrap { min-height: 240px; }
+}
+
+@media (max-width: 640px) {
+    section { padding: 60px 20px; }
+
+    .blog {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .item-header { flex-wrap: wrap; }
+    .spacer { display: none; }
+    .price { margin-top: 2px; }
+
+    .hero { min-height: 620px; }
+}
+
+@media (max-width: 380px) {
+    .blog { grid-template-columns: 1fr 1fr; }
+    .brand-name { display: none; }
+}
+
+    </style>
+</head>
+
+<body>
+
+    <header class="home">
+        <img src="images/logo.jpeg" class="log">
+
+
+        <ul class="nav-links" id="navMenu">
+            <li><a href="#menu" class="links">Our Menu</a></li>
+            <li><a href="#about" class="links">About</a></li>
+            <li><a href="#contact" class="links">Contact Us</a></li>
+            <li><a href="#location" class="links">Hours & Location</a></li>
+            <li><a href="#order" class="links">Order Now</a></li>
+        </ul>
+
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <img src="images/barner.png" class="barn">
+
+    <div class="blog">
+        <img src="images/mole chicken.jpeg">
+        <img src="images/food.jpeg">
+        <img src="images/meat.jpeg">
+        <img src="images/wing.jpeg">
+    </div>
+
+    <div class="blog">
+        <img src="images/chicken.jpeg">
+        <img src="images/plane meat.jpeg">
+        <img src="images/wing 2.jpeg">
+        <img src="images/pizza heart.jpeg">
+    </div>
+
+
+    <section id="menu" class="our-menu">
+        <h2 class="section-title">Signature Mains</h2>
+
+        <div class="menu-item">
+            <div class="item-header">
+                <span class="item-name">Hearted Pizza</span>
+                <span class="spacer"></span>
+                <span class="price">UGX 100000</span>
+            </div>
+            <p class="description">Heavenly made to suit your taste</p>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-header">
+                <span class="item-name">Plain Beef</span>
+                <span class="spacer"></span>
+                <span class="price">UGX 80000</span>
+            </div>
+            <p class="description">Made with a luxurious golden look to please the guests.</p>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-header">
+                <span class="item-name">Chicken</span>
+                <span class="spacer"></span>
+                <span class="price">UGX 90000</span>
+            </div>
+            <p class="description">A taste your tongue cannot forget.</p>
+        </div>
+    </section>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+
+        /*humbarger activator*/
+        const menu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        window.addEventListener("scroll", function () {
+            const home = document.querySelector(".home");
+            home.classList.toggle("scrolled", window.scrollY > 50);
+        });
+    </script>
+
+</body>
+
+</html>
