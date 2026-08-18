@@ -13,7 +13,7 @@ export default function Home() {
         <section className="hero-simple">
           <img src={banner} className="barn" alt="Molecule Restaurant" />
         </section>
-
+      
         <Gallery />
         <MenuList />
 

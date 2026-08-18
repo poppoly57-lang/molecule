@@ -16,14 +16,14 @@ export default function Header() {
   const closeMenu = () => setMenuOpen(false)
 
   return (
-    <header className={`home ${scrolled ? 'scrolled' : ''}`}>
+    <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
       <Link className="brand" to="/" onClick={closeMenu} aria-label="Molecule Restaurant home">
         <img src={logo} className="log" alt="Molecule Restaurant logo" />
-        <span className="brand-name">Molecule</span>
       </Link>
 
       <nav>
         <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
+          <li><Link to="/Home" className="links" onClick={closeMenu}>Home</Link></li>
           <li><Link to="/menu" className="links" onClick={closeMenu}>Our Menu</Link></li>
           <li><Link to="/about" className="links" onClick={closeMenu}>About</Link></li>
           <li><a href="/#contact" className="links" onClick={closeMenu}>Contact Us</a></li>
