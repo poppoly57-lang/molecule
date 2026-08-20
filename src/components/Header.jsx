@@ -26,9 +26,9 @@ export default function Header() {
           <li><Link to="/Home" className="links" onClick={closeMenu}>Home</Link></li>
           <li><Link to="/menu" className="links" onClick={closeMenu}>Our Menu</Link></li>
           <li><Link to="/about" className="links" onClick={closeMenu}>About</Link></li>
-          <li><a href="/#contact" className="links" onClick={closeMenu}>Contact Us</a></li>
+          <li><Link to="/contact" className="links" onClick={closeMenu}>Contact Us</Link></li>
           <li><a href="/#location" className="links" onClick={closeMenu}>Hours &amp; Location</a></li>
-          <li><a href="/#order" className="links links-cta" onClick={closeMenu}>Order Now</a></li>
+          <li><Link to="/order" className="links links-cta" onClick={closeMenu}>Order Now</Link></li>
         </ul>
       </nav>
 
