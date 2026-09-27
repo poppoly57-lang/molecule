@@ -564,6 +564,64 @@ footer a.reserve-btn:hover {
   }
 }
 
+/* === About page === */
+.about-page {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  box-sizing: border-box;
+}
+
+/* Dark overlay so text stays readable over the photo */
+.about-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
+}
+
+.about-container {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  color: #fff;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.about-titles {
+  font-size: 1rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #f5c518; 
+  margin-bottom: 12px;
+}
+
+.about-subtitle {
+  font-size: 2.5rem;
+  margin: 0 0 24px;
+  color: #fff;
+}
+
+.about-subtitle span {
+  display: block;
+  color: #f5c518;
+}
+
+.about-container p {
+  margin-bottom: 16px;
+  color: #eaeaea;
+  font-size: 1rem;
+}
+
 .contact-page,
 .order-page {
   min-height: 100vh;
